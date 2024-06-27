@@ -25,12 +25,12 @@ while True:
     success, img = cap.read()
     classIds, confs, bbox = net.detect(img, confThreshold = 0.5)
     print(classIds, bbox)
-    if len(classId) != 0:
+    if len(classIds) != 0:
 
         for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
             cv2.rectangle(img, box, color=(0, 0, 255), thickness=2)
-            cv2.putText(img, classNames[classId - 1].upper(), (box[0]+10, box[1]+30,), cv2.FONT_HERSHEY_PLAIN,1,(0,0,255), 2)
-
-
+            cv2.putText(img, classNames[classId - 1].upper(), (box[0]+10, box[1]+30,), cv2.FONT_HERSHEY_PLAIN,1,(0,0,255), 1)
     cv2.imshow("Output", img)
     cv2.waitKey(1)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
